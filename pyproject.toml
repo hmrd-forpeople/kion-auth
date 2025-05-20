@@ -1,0 +1,48 @@
+[build-system]
+# setuptools_scm is used only to automatically add all our data (non-py) files
+# to the generated wheel; it is NOT used for its version detection mechanism.
+requires = ["setuptools", "setuptools_scm"]
+
+[project]
+name = "kion-auth"
+dynamic = ["version"]
+description = "Program for running authentication automatically for kion"
+requires-python = ">=3.13"
+dependencies = ["click"]
+
+[project.optional-dependencies]
+dev = [
+    "autoflake",
+    "bandit",
+    "black",
+    "build",
+    "flake8",
+    "flake8-bugbear",
+    "Flake8-pyproject",
+    "isort",
+    "pep8-naming",
+    "playwright",
+    "pre-commit",
+]
+
+[tool.black]
+line-length = 99
+
+[tool.isort]
+line_length = 99
+profile = "black"
+
+[tool.pytest.ini_options]
+console_output_style = "progress"
+minversion = "7.2.2"
+python_files = "test_*.py"
+addopts = "-vvvv --ignore-glob .venv* --ignore-glob venv* --ignore VE"
+
+[tool.flake8]
+max-line-length = 99
+exclude = [".venv*", "venv*", "VE", "typings"]
+extend-ignore = ["E203", "E501"]
+extend-select = ["B950"]
+
+[tool.bandit]
+exclude_dirs = ["tmp", "venv"]
