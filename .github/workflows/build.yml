@@ -81,7 +81,7 @@ jobs:
           playwright install chromium
       - name: Build windows binary
         run: |
-          pyinstaller -y -F kion-auth.py
+          pyinstaller -y -F kion-auth.py -n kion-auth
       - name: Upload windows artifact
         uses: actions/upload-artifact@v4
         with:
