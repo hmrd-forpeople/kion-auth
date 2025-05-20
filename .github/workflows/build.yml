@@ -33,6 +33,11 @@ jobs:
         run: |
           source .venv/bin/activate
           pyinstaller -y -F kion-auth.py
+      - name: Release macOS binary
+        uses: softprops/action-gh-release@v2
+        with:
+          name: kion-auth-macos-${{ github.run_number }}
+          files: dist/kion-auth
 
   Build-Linux:
     name: Build on Linux
@@ -56,8 +61,14 @@ jobs:
         run: |
           source .venv/bin/activate
           pyinstaller -y -F kion-auth.py
+      - name: Release linux binary
+        uses: softprops/action-gh-release@v2
+        with:
+          name: kion-auth-linux-${{ github.run_number }}
+          files: dist/kion-auth
 
   Build-Windows:
+    if: github.ref_type == 'tag'
     name: Build on Windows
     runs-on: windows-latest
     steps:
@@ -79,3 +90,8 @@ jobs:
         run: |
           source .venv/bin/activate
           pyinstaller -y -F kion-auth.py
+      - name: Release windows binary
+        uses: softprops/action-gh-release@v2
+        with:
+          name: kion-auth-windows-${{ github.run_number }}
+          files: dist/kion-auth
