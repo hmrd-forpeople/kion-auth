@@ -1,4 +1,4 @@
-name: Build kion-auth executables
+name: Build kion-auth
 on:
   workflow_dispatch:
 
