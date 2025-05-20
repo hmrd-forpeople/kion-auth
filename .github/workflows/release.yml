@@ -37,15 +37,23 @@ jobs:
           ls -ARl
       - name: Make binaries executable
         run: |
-          chmod +x kion-auth-*
+          chmod +x kion-auth-*/*
       - name: post-chmod ls check
         run: |
           ls -ARl
       - name: Rename binaries
         run: |
-          mv kion-auth-macos-${{ inputs.ref }} kion-auth-macos
-          mv kion-auth-linux-${{ inputs.ref }} kion-auth-linux
-          #mv kion-auth-windows-${{ inputs.ref }} kion-auth-windows
+          mv kion-auth-macos-${{ inputs.ref }}/kion-auth kion-auth-macos
+          mv kion-auth-linux-${{ inputs.ref }}/kion-auth kion-auth-linux
+          #mv kion-auth-windows-${{ inputs.ref }}/kion-auth kion-auth-windows
+      - name: post-rename ls check
+        run: |
+          ls -ARl
+      - name: Remove directories
+        run: |
+          rmdir kion-auth-macos-${{ inputs.ref }}
+          rmdir kion-auth-linux-${{ inputs.ref }}
+          #rmdir kion-auth-windows-${{ inputs.ref }}
       - name: Final ls check
         run: |
           ls -ARl
