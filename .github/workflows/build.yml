@@ -1,0 +1,81 @@
+name: Build kion-auth executables
+on:
+  workflow_dispatch:
+
+# Temporarily disable push dispatch
+#  push:
+#    branches:
+#      - main
+
+env:
+  PLAYWRIGHT_BROWSERS_PATH: 0
+
+jobs:
+  Build-macOS:
+    name: Build on macOS
+    runs-on: macos-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+      - name: Setup python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Setup virtual environment
+        run: |
+          python -m venv --clear .venv
+          python -m pip install ".[dev]"
+      - name: Install playwright browser backend
+        run: |
+          source .venv/bin/activate
+          playwright install chromium
+      - name: Build macOS binary
+        run: |
+          source .venv/bin/activate
+          pyinstaller -y -F kion-auth.py
+
+  Build-Linux:
+    name: Build on Linux
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+      - name: Setup python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Setup virtual environment
+        run: |
+          python -m venv --clear .venv
+          python -m pip install ".[dev]"
+      - name: Install playwright browser backend
+        run: |
+          source .venv/bin/activate
+          playwright install chromium
+      - name: Build linux binary
+        run: |
+          source .venv/bin/activate
+          pyinstaller -y -F kion-auth.py
+
+  Build-Windows:
+    name: Build on Windows
+    runs-on: windows-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+      - name: Setup python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Setup virtual environment
+        run: |
+          python -m venv --clear .venv
+          python -m pip install ".[dev]"
+      - name: Install playwright browser backend
+        run: |
+          source .venv/bin/activate
+          playwright install chromium
+      - name: Build windows binary
+        run: |
+          source .venv/bin/activate
+          pyinstaller -y -F kion-auth.py
