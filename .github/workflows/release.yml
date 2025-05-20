@@ -6,6 +6,10 @@ on:
         description: 'Sha to work on'
         required: true
         type: string
+      runid:
+        description: 'Run ID of successful build'
+        required: true
+        type: string
 
 # Temporarily disable push dispatch
 #  push:
@@ -27,6 +31,7 @@ jobs:
           pattern: kion-auth-*-${{ inputs.ref }}
           repository: ${{ github.repository }}
           github-token: ${{ secrets.GHA_PAT }}
+          run-id: ${{ inputs.runid }}
       - name: post-download ls check
         run: |
           ls -al
