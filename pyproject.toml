@@ -8,7 +8,7 @@ name = "kion-auth"
 dynamic = ["version"]
 description = "Program for running authentication automatically for kion"
 requires-python = ">=3.13"
-dependencies = ["click"]
+dependencies = ["playwright", "click"]
 
 [project.optional-dependencies]
 dev = [
@@ -21,8 +21,8 @@ dev = [
     "Flake8-pyproject",
     "isort",
     "pep8-naming",
-    "playwright",
     "pre-commit",
+    "pyinstaller",
 ]
 
 [tool.black]
