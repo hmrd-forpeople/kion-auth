@@ -32,7 +32,11 @@ Options:
 
 ## Installation
 
-You can either install this as a plain python script on your machine by setting up a virtual environment with python 3.13 or higher, and installing via pyproject.toml, or download a pre-built self-contained binary from the releases.
+You can either install this as a plain python script on your machine using the development instructions below, or you can download a pre-built self-contained binary from the releases.
+
+## Developing
+
+After cloning the repo, first create and activate a virtual environment using python 3.12.x. Next, run `python -m pip install ".[dev]"`. After that, you need to install the chromium shell for playwright by running `python -m playwright install chromium`. Now you're ready to develop on kion-auth!
 
 ### Recommendation
 
