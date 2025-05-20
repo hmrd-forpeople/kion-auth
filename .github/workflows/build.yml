@@ -33,11 +33,12 @@ jobs:
         run: |
           source .venv/bin/activate
           pyinstaller -y -F kion-auth.py
-      - name: Release macOS binary
-        uses: softprops/action-gh-release@v2
+      - name: Upload macOS artifact
+        uses: actions/upload-artifact@v4
         with:
-          name: kion-auth-macos-${{ github.run_number }}
-          files: dist/kion-auth
+          name: kion-auth-macos-${{ github.sha }}
+          path: dist/kion-auth
+          overwrite: true
 
   Build-Linux:
     name: Build on Linux
@@ -61,11 +62,12 @@ jobs:
         run: |
           source .venv/bin/activate
           pyinstaller -y -F kion-auth.py
-      - name: Release linux binary
-        uses: softprops/action-gh-release@v2
+      - name: Upload linux artifact
+        uses: actions/upload-artifact@v4
         with:
-          name: kion-auth-linux-${{ github.run_number }}
-          files: dist/kion-auth
+          name: kion-auth-linux-${{ github.sha }}
+          path: dist/kion-auth
+          overwrite: true
 
   Build-Windows:
     if: github.ref_type == 'tag'
@@ -90,8 +92,9 @@ jobs:
         run: |
           source .venv/bin/activate
           pyinstaller -y -F kion-auth.py
-      - name: Release windows binary
-        uses: softprops/action-gh-release@v2
+      - name: Upload windows artifact
+        uses: actions/upload-artifact@v4
         with:
-          name: kion-auth-windows-${{ github.run_number }}
-          files: dist/kion-auth
+          name: kion-auth-windows-${{ github.sha }}
+          path: dist/kion-auth
+          overwrite: true
