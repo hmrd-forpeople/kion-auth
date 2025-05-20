@@ -1,3 +1,5 @@
 .python-version
 build/
 *.egg-info/
+dist/
+kion-auth.spec
