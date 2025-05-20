@@ -25,6 +25,8 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           pattern: kion-auth-*-${{ inputs.ref }}
+          repository: ${{ github.repository }}
+          github-token: ${{ secrets.GHA_PAT }}
       - name: post-download ls check
         run: |
           ls -al
@@ -38,7 +40,7 @@ jobs:
         run: |
           mv kion-auth-macos-${{ inputs.ref }} kion-auth-macos
           mv kion-auth-linux-${{ inputs.ref }} kion-auth-linux
-          mv kion-auth-windows-${{ inputs.ref }} kion-auth-windows
+          #mv kion-auth-windows-${{ inputs.ref }} kion-auth-windows
       - name: Final ls check
         run: |
           ls -al
@@ -51,4 +53,4 @@ jobs:
           files: |
             kion-auth-macos
             kion-auth-linux
-            kion-auth-windows
+            # kion-auth-windows
