@@ -24,7 +24,7 @@ jobs:
     steps:
       - name: Starting ls check
         run: |
-          ls -al
+          ls -ARl
       - name: Download built binaries
         uses: actions/download-artifact@v4
         with:
@@ -34,13 +34,13 @@ jobs:
           run-id: ${{ inputs.runid }}
       - name: post-download ls check
         run: |
-          ls -al
+          ls -ARl
       - name: Make binaries executable
         run: |
           chmod +x kion-auth-*
       - name: post-chmod ls check
         run: |
-          ls -al
+          ls -ARl
       - name: Rename binaries
         run: |
           mv kion-auth-macos-${{ inputs.ref }} kion-auth-macos
@@ -48,7 +48,7 @@ jobs:
           #mv kion-auth-windows-${{ inputs.ref }} kion-auth-windows
       - name: Final ls check
         run: |
-          ls -al
+          ls -ARl
       - name: Create release
         # Temporarily disable the actual release to see what happens
         if: github.repository == 'nwgh/homedir'
