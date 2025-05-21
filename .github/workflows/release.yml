@@ -1,29 +1,20 @@
 name: Release
 on:
-  workflow_dispatch:
-    inputs:
-      ref:
-        description: 'Sha to work on'
-        required: true
-        type: string
-
-# Temporarily disable push dispatch
-#  push:
-#    branches:
-#      - main
+  push:
+    tags:
+      - v*
 
 env:
   GH_TOKEN: ${{ secrets.GHA_CLI_PAT }}
 
 jobs:
   Release:
-    # if: github.ref_type == 'tag'
     name: Release kion-auth
     runs-on: ubuntu-latest
     steps:
       - name: Get build run id of this sha
         run: |
-          shaRunId="$(gh api /repos/hmrd-forpeople/kion-auth/actions/workflows/build.yml/runs --method get -f head_sha=${{ inputs.ref }} --jq ".workflow_runs[0].id")"
+          shaRunId="$(gh api /repos/hmrd-forpeople/kion-auth/actions/workflows/build.yml/runs --method get -f head_sha=${{ github.sha }} --jq ".workflow_runs[0].id")"
           echo 'SHA_RUN_ID='$shaRunId >> $GITHUB_ENV
       - name: Starting ls check
         run: |
@@ -31,7 +22,7 @@ jobs:
       - name: Download built binaries
         uses: actions/download-artifact@v4
         with:
-          pattern: kion-auth-*-${{ inputs.ref }}
+          pattern: kion-auth-*-${{ github.sha }}
           repository: ${{ github.repository }}
           github-token: ${{ secrets.GHA_PAT }}
           run-id: ${{ env.SHA_RUN_ID }}
@@ -46,23 +37,21 @@ jobs:
           ls -ARl
       - name: Rename binaries
         run: |
-          mv kion-auth-macos-${{ inputs.ref }}/kion-auth kion-auth-macos
-          mv kion-auth-linux-${{ inputs.ref }}/kion-auth kion-auth-linux
-          mv kion-auth-windows-${{ inputs.ref }}/kion-auth.exe kion-auth-windows.exe
+          mv kion-auth-macos-${{ github.sha }}/kion-auth kion-auth-macos
+          mv kion-auth-linux-${{ github.sha }}/kion-auth kion-auth-linux
+          mv kion-auth-windows-${{ github.sha }}/kion-auth.exe kion-auth-windows.exe
       - name: post-rename ls check
         run: |
           ls -ARl
       - name: Remove directories
         run: |
-          rmdir kion-auth-macos-${{ inputs.ref }}
-          rmdir kion-auth-linux-${{ inputs.ref }}
-          rmdir kion-auth-windows-${{ inputs.ref }}
+          rmdir kion-auth-macos-${{ github.sha }}
+          rmdir kion-auth-linux-${{ github.sha }}
+          rmdir kion-auth-windows-${{ github.sha }}
       - name: Final ls check
         run: |
           ls -ARl
       - name: Create release
-        # Temporarily disable the actual release to see what happens
-        if: github.repository == 'nwgh/homedir'
         uses: softprops/action-gh-release@v2
         with:
           name: kion-auth-${{ github.ref_name }}
