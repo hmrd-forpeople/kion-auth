@@ -2,14 +2,17 @@ name: Build
 on:
   workflow_dispatch:
   push:
-    branches:
-      - main
+    paths:
+      - '**.py'
+      - 'pyproject.toml'
+      - '.github/workflows/build.yml'
 
 env:
   PLAYWRIGHT_BROWSERS_PATH: 0
 
 jobs:
   Build-macOS:
+    if: ${{ github.ref_name == 'main' }}
     name: Build on macOS
     runs-on: macos-latest
     steps:
@@ -36,6 +39,7 @@ jobs:
           overwrite: true
 
   Build-Linux:
+    if: ${{ github.ref_name == 'main' }}
     name: Build on Linux
     runs-on: ubuntu-latest
     steps:
@@ -62,6 +66,7 @@ jobs:
           overwrite: true
 
   Build-Windows:
+    if: ${{ github.ref_name == 'main' }}
     name: Build on Windows
     runs-on: windows-latest
     steps:
