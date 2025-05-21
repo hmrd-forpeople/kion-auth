@@ -16,9 +16,6 @@ jobs:
         run: |
           shaRunId="$(gh api /repos/hmrd-forpeople/kion-auth/actions/workflows/build.yml/runs --method get -f head_sha=${{ github.sha }} --jq ".workflow_runs[0].id")"
           echo 'SHA_RUN_ID='$shaRunId >> $GITHUB_ENV
-      - name: Starting ls check
-        run: |
-          ls -ARl
       - name: Download built binaries
         uses: actions/download-artifact@v4
         with:
@@ -26,31 +23,19 @@ jobs:
           repository: ${{ github.repository }}
           github-token: ${{ secrets.GHA_PAT }}
           run-id: ${{ env.SHA_RUN_ID }}
-      - name: post-download ls check
-        run: |
-          ls -ARl
       - name: Make binaries executable
         run: |
           chmod +x kion-auth-*/*
-      - name: post-chmod ls check
-        run: |
-          ls -ARl
       - name: Rename binaries
         run: |
           mv kion-auth-macos-${{ github.sha }}/kion-auth kion-auth-macos
           mv kion-auth-linux-${{ github.sha }}/kion-auth kion-auth-linux
           mv kion-auth-windows-${{ github.sha }}/kion-auth.exe kion-auth-windows.exe
-      - name: post-rename ls check
-        run: |
-          ls -ARl
       - name: Remove directories
         run: |
           rmdir kion-auth-macos-${{ github.sha }}
           rmdir kion-auth-linux-${{ github.sha }}
           rmdir kion-auth-windows-${{ github.sha }}
-      - name: Final ls check
-        run: |
-          ls -ARl
       - name: Create release
         uses: softprops/action-gh-release@v2
         with:
