@@ -16,30 +16,10 @@ Heavily based on a script written by Steven Angulo (@AX2J-Bixal)
 
 Currently, this has only been tested on macOS. It _should_ work well on Linux. Windows might need some testing and bugfixes.
 
-## Configuration
-
-kion-auth can be configured either via the command line or from a ini file. An example configuration file (with comments) lives in this directory as example.ini. The default location that this will look for the configuration is `${HOME}/.config/kion-auth.ini`
-
-Command-line arguments take precedence over configuration in the ini file.
-
-```
-Usage: kion-auth.py [OPTIONS]
-
-Options:
-  --credentials TEXT  Location of AWS Credentials file  [default: /home/user/.aws/credentials]
-  --config TEXT       Path of configuration file  [default: /home/user/.config/kion-auth.ini]
-  --user TEXT         Username used for logging in to kion
-  --password TEXT     Password used for logging in to kion
-  --profile TEXT      Name of AWS profile to update
-  --log TEXT          Path of log file  [default: /home/user/.log/kion-auth.log]
-  --debug             Print extra logging
-  --help              Show this message and exit.
-  ```
-
 ## Installation
 
 See the [install instructions](https://github.com/hmrd-forpeople/kion-auth/wiki/Installation-Instructions)
 
-## Developing
+## Configuration
 
-After cloning the repo, first create and activate a virtual environment using python 3.12.x. Next, run `python -m pip install ".[dev]"`. After that, you need to install the chromium shell for playwright by running `python -m playwright install chromium`. Now you're ready to develop on kion-auth!
+See the [configuration instructions](https://github.com/hmrd-forpeople/kion-auth/wiki/Configuration)
