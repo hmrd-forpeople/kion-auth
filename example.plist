@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>us.forpeople.kion_auth</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>kion-auth</string> <!-- Set this to the full path where kion-auth is -->
+        <string>--config</string>
+        <string>/Volumes/Shared_Files/config_share/kion-auth.ini</string> <!-- Set this to the full path where your config file is -->
+    </array>
+    <key>RunAtLoad</key> <!-- Run this when the service is first loaded -->
+    <true/>
+    <key>StartInterval</key>
+    <integer>12600</integer> <!-- Also run this every 3.5 hours (in seconds) -->
+</dict>
+</plist>
