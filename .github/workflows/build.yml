@@ -1,11 +1,9 @@
-name: Build kion-auth
+name: Build
 on:
   workflow_dispatch:
-
-# Temporarily disable push dispatch
-#  push:
-#    branches:
-#      - main
+  push:
+    branches:
+      - main
 
 env:
   PLAYWRIGHT_BROWSERS_PATH: 0
