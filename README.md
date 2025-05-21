@@ -38,12 +38,8 @@ Options:
 
 ## Installation
 
-You can either install this as a plain python script on your machine using the development instructions below, or you can download a pre-built self-contained binary from the releases.
+See the [install instructions](https://github.com/hmrd-forpeople/kion-auth/wiki/Installation-Instructions)
 
 ## Developing
 
 After cloning the repo, first create and activate a virtual environment using python 3.12.x. Next, run `python -m pip install ".[dev]"`. After that, you need to install the chromium shell for playwright by running `python -m playwright install chromium`. Now you're ready to develop on kion-auth!
-
-### Recommendation
-
-It is highly recommended that you install this in a virtual machine that is permanently connected to zscaler. That way your local machine can stay unencumberd from the zscaler instability. The only downside to this recommendation is that you would then have to access the AWS console from your virtual machine (as zscaler is required to access the AWS console via the web). You would want to have your AWS config directory on your physical machine as a shared directory with the virtual machine, and configure this program to write to the credentials file in the shared AWS directory. Users of macOS can build a macOS virtual machine using the UTM app (available for free) or VirtualBox. Users of Windows or Linux can build a VM of their preferred OS using VirtualBox or their preferred virtualization software.
