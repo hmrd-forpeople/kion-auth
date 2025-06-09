@@ -22,7 +22,7 @@ dev = [
     "isort",
     "pep8-naming",
     "pre-commit",
-    "pyinstaller==5.13.2",
+    "pyinstaller==6.14.1",
 ]
 
 [tool.black]
