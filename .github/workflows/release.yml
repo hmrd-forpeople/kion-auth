@@ -17,7 +17,7 @@ jobs:
           shaRunId="$(gh api /repos/hmrd-forpeople/kion-auth/actions/workflows/build.yml/runs --method get -f head_sha=${{ github.sha }} --jq ".workflow_runs[0].id")"
           echo 'SHA_RUN_ID='$shaRunId >> $GITHUB_ENV
       - name: Download built binaries
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         with:
           pattern: kion-auth-*-${{ github.sha }}
           repository: ${{ github.repository }}
