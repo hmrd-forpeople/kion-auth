@@ -121,8 +121,15 @@ def get_new_aws_credentials(user: str, password: str) -> tuple[str, str, str]:
         ok_button_locator.click()
 
         # Load the new short-term keys by opening that page item.
-        new_content_selector = "div.quick-cloud-access-item.card.card-body.pg-p-2.pg-mb-1"
-        page.click(new_content_selector)
+        try:
+            # This is a new, and more direct way of doing this. It
+            # SHOULD work in all cases.
+            page.get_by_text("Short-term").click()
+        except Exception:
+            # However, just in case, let's fall back to the old way.
+            # Kion is krap.
+            new_content_selector = "div.quick-cloud-access-item.card.card-body.pg-p-2.pg-mb-1"
+            page.click(new_content_selector)
 
         # Sleep to let the page load the keys
         time.sleep(3)
