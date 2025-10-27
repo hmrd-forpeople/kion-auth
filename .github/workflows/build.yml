@@ -32,7 +32,7 @@ jobs:
         run: |
           pyinstaller -y -F kion-auth.py
       - name: Upload macOS artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: kion-auth-macos-${{ github.sha }}
           path: dist/kion-auth
@@ -59,7 +59,7 @@ jobs:
         run: |
           pyinstaller -y -F kion-auth.py
       - name: Upload linux artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: kion-auth-linux-${{ github.sha }}
           path: dist/kion-auth
@@ -87,7 +87,7 @@ jobs:
           pyinstaller -y -F kion-auth.py
           ls -l dist/
       - name: Upload windows artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: kion-auth-windows-${{ github.sha }}
           path: dist/kion-auth.exe
